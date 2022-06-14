@@ -60,7 +60,7 @@ void AdminMode()
         printf("\nEnter voting candidates:\n");
         for(int i=1;i<=num_candidates;i++)
         {
-    
+
             printf("%d. ",i);
             fflush(stdin);
             scanf("%[^\n]s",candidates[i-1].name);
@@ -109,7 +109,7 @@ void VotingMode()
             continue;
         }
         else candidates[voters[no].vote-1].number++;
-        
+
         //strcpy(ll[cc],voters[no].name);
         //strcpy(ll[cc+1],candidates[voters[no].vote-1].name);
         cc=cc+2;
@@ -135,17 +135,35 @@ void DisplayResults()
 
 void DV()
 {
-    /*int jj=0;
-    while(ll[jj])
+    char cm;
+    for(int i=0;i<=num_candidates+1;i++)
     {
-        printf("%s  ",ll[jj]);
-        ++jj;
-        if((jj%2)==0) printf("\n");
-    }*/
-    for(int i=1;i<=num_candidates;i++)
-    {
-        printf("%s\t",voters[i-1].name);
-        printf("%s\t\t",candidates[i-1].name);
+        printf("%s\t",voters[i].name);
+        printf("%s\n",candidates[voters[i].vote-1].name);
+    }
+    fflush(stdin);
+    printf("Press Y to save results in file or press any other key to continue:");
+    scanf("%c",&cm);
+    printf("\n%c",cm);
+    if(cm=='Y'){
+        FILE *fptr;
+        fptr = fopen("voting.txt","w");
+        for(int i=0;i<=num_candidates+1;i++)
+        {
+            char x[]=voters[i].name;
+            char y[]=candidates[voters[i].vote-1].name;
+            char m[]="\t"
+            strcat(x,m);
+            strcat(x,y);
+            int jm=0;
+            while(x[jm]!='\0')
+            {
+                fputc(cc[j],fptr);
+                j++;
+            }
+            fputc("\n",fptr);
+        }
+        fclose(fptr);
     }
 }
 
